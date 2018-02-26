@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SpamChecker.iml" filepath="$PROJECT_DIR$/SpamChecker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SpamChecker.iml" filepath="$PROJECT_DIR$/.idea/SpamChecker.iml" />
+      <module fileurl="file://C:\Users\aadit\AndroidStudioProjects\SpamChecker\SpamChecker.iml" filepath="C:\Users\aadit\AndroidStudioProjects\SpamChecker\SpamChecker.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
