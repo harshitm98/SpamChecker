@@ -13,6 +13,7 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,13 +30,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.notification_text);
-        button = (Button)findViewById(R.id.button);
+        button = findViewById(R.id.button);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            boolean weHaveNotificationListenerPermission = false;
+            for (String service : NotificationManagerCompat.getEnabledListenerPackages(this)) {
+                if (service.equals(getPackageName()))
+                    weHaveNotificationListenerPermission = true;
+            }
+            if (!weHaveNotificationListenerPermission) {        //ask for permission
+                Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+                startActivity(intent);
+            }
+        }
+
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("Msg"));
     }
+
 
     public BroadcastReceiver onNotice = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+
             String title = intent.getStringExtra("title");
             String text = intent.getStringExtra("text");
 
@@ -44,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
     public void createNotification(View view){
-        textView.setText("Hai");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Create the NotificationChannel, but only on API 26+ because
@@ -70,8 +86,5 @@ public class MainActivity extends AppCompatActivity {
 
             notificationManager.notify(1234,mBuilder.build());
         }
-
-
-
     }
 }

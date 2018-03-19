@@ -23,7 +23,7 @@ public class NotificationService extends NotificationListenerService {
     @Override
     public void onCreate() {
         super.onCreate();
-        context.getApplicationContext();
+        context = getApplicationContext();
     }
 
     @Override
@@ -50,7 +50,7 @@ public class NotificationService extends NotificationListenerService {
 
         LocalBroadcastManager.getInstance(context).sendBroadcast(msgrcv);
 
-        super.onNotificationPosted(sbn);
+        //super.onNotificationPosted(sbn);
     }
 
     @Override
